@@ -1,0 +1,6 @@
+{
+  "name": "GirlyCycle",
+  "description": "Perimenopause symptom tracker for Gen X women (ages 45-60) featuring daily logging, cycle tracking, doctor visit reports, and actionable insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

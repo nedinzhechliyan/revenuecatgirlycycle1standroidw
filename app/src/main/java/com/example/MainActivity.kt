@@ -1,0 +1,45 @@
+package com.example
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.ui.navigation.GirlyCycleApp
+import com.example.ui.theme.MyApplicationTheme
+import com.example.ui.viewmodel.GirlyCycleViewModel
+
+class MainActivity : ComponentActivity() {
+
+    private val viewModel: GirlyCycleViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            val isDarkMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
+            val isHighContrast by viewModel.isHighContrast.collectAsStateWithLifecycle()
+            val isLargeText by viewModel.isLargeText.collectAsStateWithLifecycle()
+
+            MyApplicationTheme(
+                darkTheme = isDarkMode,
+                highContrast = isHighContrast,
+                largeText = isLargeText
+            ) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    GirlyCycleApp(viewModel = viewModel)
+                }
+            }
+        }
+    }
+}
